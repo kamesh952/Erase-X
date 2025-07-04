@@ -216,41 +216,232 @@
         }
       }
 
-      /* Hero section */
-      .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 10rem 0;
-        min-height: 70vh; /* 80% of viewport height */
+      /* Hero section */.hero {
+  position: relative;
+  min-height: 83vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+  color: white;
+  overflow: hidden;
+}
 
-        background: linear-gradient(
-            135deg,
-            rgba(79, 70, 229, 0.05) 0%,
-            rgba(249, 115, 22, 0.05) 100%
-          ),
-          url("remove_image_background (1).jpg"); /* Replace with your actual image path */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        margin-bottom: 3rem;
-      }
-.hero h1 {
-  font-size: 5.5rem;
-  font-weight: 700;
-  color: #111827; /* Dark navy/charcoal */
+/* === New Background Animations === */
+
+/* Digital Grid Pulse */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridPulse 8s infinite alternate;
+  z-index: 0;
+}
+
+@keyframes gridPulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.1; }
+}
+
+/* Scanning Laser Effect */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.8), transparent);
+  box-shadow: 0 0 10px 2px rgba(96, 165, 250, 0.5);
+  animation: scan 4s linear infinite;
+  z-index: 0;
+}
+
+@keyframes scan {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* === Enhanced Floating Elements === */
+
+/* Floating Shapes - New 3D Transform */
+.floating-shape {
+  position: absolute;
+  opacity: 0.15;
+  z-index: 0;
+  filter: drop-shadow(0 0 5px rgba(96, 165, 250, 0.5));
+}
+
+.floating-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.3) 0%, transparent 70%);
+  animation: float3d 18s ease-in-out infinite;
+  top: 20%;
+  left: 10%;
+}
+
+.floating-triangle {
+  width: 0;
+  height: 0;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  border-bottom: 100px solid rgba(244, 114, 182, 0.2);
+  animation: float3d 15s ease-in-out infinite reverse;
+  top: 60%;
+  right: 15%;
+}
+
+.floating-square {
+  width: 100px;
+  height: 100px;
+  background: rgba(74, 222, 128, 0.2);
+  animation: float3d 20s ease-in-out infinite 2s;
+  bottom: 20%;
+  left: 20%;
+}
+
+@keyframes float3d {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translate3d(50px, -30px, 20px) rotateX(10deg) rotateY(10deg); }
+  50% { transform: translate3d(0, -50px, 0) rotateX(0deg) rotateY(20deg); }
+  75% { transform: translate3d(-50px, 0, -20px) rotateX(10deg) rotateY(0deg); }
+}
+
+/* Particles - Enhanced with Glow */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+.particle.small {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.5);
+}
+
+.particle.medium {
+  width: 6px;
+  height: 6px;
+  background: rgba(96, 165, 250, 0.8);
+  box-shadow: 0 0 8px 2px rgba(96, 165, 250, 0.5);
+}
+
+.particle.large {
+  width: 8px;
+  height: 8px;
+  background: rgba(244, 114, 182, 0.8);
+  box-shadow: 0 0 10px 3px rgba(244, 114, 182, 0.5);
+}
+
+/* New Connection Lines Between Particles */
+.connection-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.5), transparent);
+  transform-origin: left center;
+  z-index: 0;
+}
+
+/* === Content Styles === */
+
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
   margin-bottom: 1.5rem;
-  line-height: 1.2;/* Adds pop on bright backgrounds */
+  background: linear-gradient(to right, #fff, #e0e0e0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.hero p {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9); /* Soft white with slight transparency */
-  max-width: 600px;
-  margin: 0 auto 2.5rem;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 1); /* Slight shadow to increase legibility */
+p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, 0.9);
 }
+
+/* CTA Button - Enhanced with Border Animation */
+.cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(45deg, #ffffff, #b8d3ff);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+  z-index: 1;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50px;
+  background: linear-gradient(45deg, #ffffff, #c4d9f3, #eaf2ff);
+  background-size: 200% 200%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: borderGradient 3s linear infinite;
+}
+
+@keyframes borderGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.cta-btn:hover::before {
+  opacity: 1;
+}
+
+.cta-btn i {
+  margin-right: 0.75rem;
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
 
 @media (min-width: 768px) {
   .hero h1 {
@@ -1245,24 +1436,34 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="container">
-        <h1>Remove Backgrounds in Seconds with AI</h1>
-        <p>
-          EraseX uses advanced artificial intelligence to automatically remove
-          backgrounds from your images with perfect precision. No skills
-          required!
-        </p>
-        <button
-          class="cta-btn pulse"
-          onclick="document.getElementById('fileInput').click()"
-        >
-          <i class="fas fa-upload"></i> Upload Image Now
-        </button>
-      </div>
-    </section>
-
+    <!-- Hero Section --><div class="hero" id="home">
+  <!-- Floating Shapes -->
+  <div class="floating-shape floating-circle"></div>
+  <div class="floating-shape floating-triangle"></div>
+  <div class="floating-shape floating-square"></div>
+  
+  <!-- Floating Particles -->
+  <div class="particle small" style="top: 15%; left: 5%; animation: drift 20s linear infinite;"></div>
+  <div class="particle medium" style="top: 30%; left: 15%; animation: drift 25s linear infinite;"></div>
+  <div class="particle large" style="top: 70%; left: 10%; animation: drift 15s linear infinite;"></div>
+  <div class="particle small" style="top: 40%; left: 80%; animation: drift 30s linear infinite;"></div>
+  
+  <!-- Connection Lines -->
+  <div class="connection-line" style="width: 120px; top: 22%; left: 8%; transform: rotate(30deg); animation: connect 4s ease-in-out infinite;"></div>
+  <div class="connection-line" style="width: 150px; top: 65%; left: 15%; transform: rotate(-15deg); animation: connect 5s ease-in-out infinite 1s;"></div>
+  
+  <div class="container">
+    <h1>Remove Backgrounds in Seconds with AI</h1>
+    <p>
+      EraseX uses advanced artificial intelligence to automatically remove
+      backgrounds from your images with perfect precision. No skills
+      required!
+    </p>
+    <button class="cta-btn pulse" onclick="document.getElementById('fileInput').click()">
+      <i class="fas fa-upload"></i> Upload Image Now
+    </button>
+  </div>
+</div>
     <!-- Main Content -->
     <div class="container">
       <div class="main-container">
@@ -2029,6 +2230,37 @@
           navbar.classList.add("scrolled");
         }
       });
+      
+// Add connection lines dynamically (optional enhancement)
+document.addEventListener('DOMContentLoaded', function() {
+  const hero = document.querySelector('.hero');
+  const particles = document.querySelectorAll('.particle');
+  
+  particles.forEach(particle => {
+    // Add subtle twinkle animation
+    particle.style.animation = `drift ${15 + Math.random() * 15}s linear infinite, twinkle ${3 + Math.random() * 4}s ease-in-out infinite`;
+  });
+  
+  // Add to your style tag:
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes drift {
+      0% { transform: translate(-100px, 0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translate(calc(100vw + 100px), -100px); opacity: 0; }
+    }
+    @keyframes connect {
+      0%, 100% { transform: scaleX(0) rotate(30deg); opacity: 0; }
+      50% { transform: scaleX(1) rotate(30deg); opacity: 0.7; }
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+  `;
+  document.head.appendChild(style);
+});
     </script>
   </body>
 </html>
