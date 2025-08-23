@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EraseX - AI Background Remover</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <i class="fas fa-magic logo-icon"></i>
+                Erase<span>X</span>
+            </a>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#removebg">Remove BG</a></li>
+                <li><a href="#uses">Use Cases</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#removebg" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Animation -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Remove Backgrounds in Seconds with AI</h1>
+                <p>
+                    EraseX uses advanced artificial intelligence to automatically remove
+                    backgrounds from your images with perfect precision. No skills
+                    required!
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-upload"></i> Upload Image Now
+                    </button>
+                   <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({ behavior: 'smooth' });">
+                      <i class="fas fa-play-circle"></i> Features
+                    </button>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2.5M+</div>
+                        <div class="stat-label">Images Processed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">User Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="model-container" id="modelContainer">
+                <div class="model-wrapper" id="modelWrapper">
+                    <div class="model">
+                        <div class="model-content">
+                            <i class="fas fa-magic main-icon"></i>
+                            <p>AI-Powered Magic</p>
+                            <i class="fas fa-image floating-icon"></i>
+                            <i class="fas fa-camera floating-icon"></i>
+                            <i class="fas fa-cloud-upload-alt floating-icon"></i>
+                            <i class="fas fa-download floating-icon"></i>
+                            <i class="fas fa-robot floating-icon"></i>
+                            <div class="pulse" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main Content -->
+    <div class="container">
+      <div class="main-container">
+        <!-- Image Preview Section -->
+        <div class="image-section">
+          <div class="image-wrapper">
+            <img
+              src="ai-background-remover.png"
+              alt="Example of background removal"
+              class="main-image"
+            />
+          </div>
+          <div class="text-content">
+            <h1>Professional Quality Background Removal</h1>
+            <p>
+              Get clean, precise cuts every time with our AI-powered background
+              remover. Perfect for product photos, portraits, marketing
+              materials, and more.
+            </p>
+            <div class="tooltip">
+              <span class="tooltiptext"
+                >Supports JPG, PNG, and WEBP formats</span
+              >
+              <i class="fas fa-info-circle" style="color: --primary"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section" id="removebg">
+          <div
+            class="upload-area"
+            onclick="document.getElementById('fileInput').click()"
+          >
+            <input
+              type="file"
+              id="fileInput"
+              style="display: none"
+              accept="image/*"
+              onchange="handleFileUpload(event)"
+            />
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>Upload Your Image</h3>
+            <p>Drag & drop your image here or click to browse</p>
+            <button class="upload-btn">
+              <i class="fas fa-folder-open"></i> Select File
+            </button>
+          </div>
+          <div class="no-image-text">
+            Don't have an image? Try one of these examples:
+          </div>
+          <div class="preview-gallery">
+            <img
+              src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+              class="preview-image"
+              onclick="loadExample(this.src)"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80"
+              class="preview-image"
+              onclick="loadExample(this.src)"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1553452118-621e1f860f43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+              class="preview-image"
+              onclick="loadExample(this.src)"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1099&q=80"
+              class="preview-image"
+              onclick="loadExample(this.src)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Preview Container -->
+      <div id="imagePreviewContainer" class="image-preview-container">
+        <div class="image-preview-header">
+          <div class="image-preview-title">Image Preview</div>
+          <button class="close-button" onclick="closePreview()">&times;</button>
+        </div>
+        <div class="image-preview-content">
+          <img
+            id="previewImg"
+            src=""
+            alt="Image Preview"
+            class="image-preview"
+          />
+          <div class="action-buttons">
+            <button
+              id="removeBtn"
+              class="action-btn remove-btn"
+              onclick="removeBackground()"
+            >
+              <i class="fas fa-magic"></i> Remove Background
+            </button>
+            <button
+              id="downloadBtn"
+              class="action-btn download-btn"
+              onclick="downloadImage()"
+              disabled
+            >
+              <i class="fas fa-download"></i> Download
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Use Cases Section -->
+    <div class="container">
+      <div class="section-title" id="uses">
+        <h2>Use Cases</h2>
+        <p>See how EraseX can transform your images for various purposes</p>
+      </div>
+
+      <div class="comparison-container">
+        <div class="comparison-card">
+          <div class="comparison">
+            <img src="2after.png" alt="After" />
+            <img
+              src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+              alt="Before"
+              class="before"
+            />
+            <div class="slider"></div>
+          </div>
+          <div class="comparison-info">
+            <h3>E-commerce Products</h3>
+            <p>
+              Create clean product images with transparent backgrounds for your
+              online store.
+            </p>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison">
+            <img src="1after.png" alt="After" />
+            <img
+              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+              alt="Before"
+              class="before"
+            />
+            <div class="slider"></div>
+          </div>
+          <div class="comparison-info">
+            <h3>Portrait Photography</h3>
+            <p>
+              Remove distracting backgrounds from portraits for professional
+              headshots.
+            </p>
+          </div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison">
+            <img src="3after.png" alt="After" />
+            <img
+              src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1099&q=80"
+              alt="Before"
+              class="before"
+            />
+            <div class="slider"></div>
+          </div>
+          <div class="comparison-info">
+            <h3>Marketing Materials</h3>
+            <p>
+              Create stunning visuals for ads, social media, and presentations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container">
+      <div class="section-title" id="features">
+        <h2>Powerful Features</h2>
+        <p>Discover what makes EraseX the best background remover online</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-bolt feature-icon"></i>
+          <h3>Lightning Fast Processing</h3>
+          <p>
+            Our AI technology removes backgrounds in seconds, saving you hours
+            of manual work. No more painstaking selections with complex tools.
+          </p>
+          <img src="back1.jpg"
+           class="feature-image" alt="Fast processing" />
+        </div>
+
+        <div class="feature-card">
+          <i class="fas fa-cut feature-icon"></i>
+          <h3>Pixel-Perfect Precision</h3>
+          <p>
+            Get clean, professional cuts around complex edges like hair, fur,
+            and transparent objects with our advanced edge detection.
+          </p>
+          <img src="back3.webp" class="feature-image" alt="Precision cuts" />
+        </div>
+
+        <div class="feature-card">
+          <i class="fas fa-palette feature-icon"></i>
+          <h3>Background Customization</h3>
+          <p>
+            Not just removal! Replace backgrounds with colors, gradients, or
+            your own images. Add shadows and effects for professional results.
+          </p>
+          <img
+            src="back2.jpg"
+            class="feature-image"
+            alt="Background customization"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="container">
+      <div class="cta-section">
+        <div class="cta-content">
+          <h2>Ready to Transform Your Images?</h2>
+          <p>
+            Join thousands of users who trust EraseX for their background
+            removal needs. No credit card required.
+          </p>
+          <button
+            class="cta-btn"
+            onclick="document.getElementById('fileInput').click()"
+          >
+            <i class="fas fa-magic"></i> Remove Background Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-container">
+          <div class="footer-section">
+            <a href="#" class="footer-logo">
+              <i class="fas fa-magic"></i>
+              EraseX
+            </a>
+            <div class="footer-about">
+              <p>
+                EraseX is an AI-powered background remover that helps
+                individuals and businesses create professional-looking images in
+                seconds.
+              </p>
+            </div>
+            <div class="social-links">
+              <a
+                href="https://www.instagram.com/kameshcrush96/"
+                aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="https://github.com/kamesh952" aria-label="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+             </a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#home"><i class="fas fa-chevron-right"></i> Home</a>
+              </li>
+              <li>
+                <a href="#removebg"
+                  ><i class="fas fa-chevron-right"></i> Remove BG</a
+                >
+              </li>
+              <li>
+                <a href="#uses"
+                  ><i class="fas fa-chevron-right"></i> Use Cases</a
+                >
+              </li>
+              <li>
+                <a href="#features"
+                  ><i class="fas fa-chevron-right"></i> Features</a
+                >
+              </li>
+              <li>
+                <a href="#contact"
+                  ><i class="fas fa-chevron-right"></i> Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>Resources</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i> Help Center</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i> Tutorials</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i> API Documentation</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i> Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i> Terms of Service</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="language-selector">
+            <a href="#">English</a>
+            <a href="#">中文</a>
+            <a href="#">日本語</a>
+            <a href="#">Español</a>
+            <a href="#">Français</a>
+            <a href="#">Deutsch</a>
+            <a href="#">हिन्दी</a>
+          </div>
+          <p>© 2025 EraseX. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2 class="modal-title">Sign In to EraseX</h2>
+        <iframe
+          src=""
+          style="display: none; width: 100%; height: 400px; border: none"
+        ></iframe>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Handle mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // 3D model interaction
+        const modelWrapper = document.getElementById('modelWrapper');
+        const modelContainer = document.getElementById('modelContainer');
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+        let currentRotationX = 0;
+        let currentRotationY = 0;
+        
+        // Handle mouse movement for 3D effect
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+            
+            targetRotationY = mouseX * 0.1;
+            targetRotationX = mouseY * 0.1;
+        });
+        
+        // Handle device orientation for mobile
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (e) => {
+                targetRotationY = e.gamma * 0.01;
+                targetRotationX = e.beta * 0.005;
+            });
+        }
+        
+        // Handle touch for mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        modelContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            e.preventDefault();
+        }, { passive: false });
+        
+        modelContainer.addEventListener('touchmove', (e) => {
+            if (!touchStartX || !touchStartY) return;
+            
+            const touchX = e.touches[0].clientX;
+            const touchY = e.touches[0].clientY;
+            
+            targetRotationY = (touchX - touchStartX) * 0.01;
+            targetRotationX = (touchY - touchStartY) * 0.01;
+            
+            e.preventDefault();
+        }, { passive: false });
+        
+        // Animation loop for smooth rotation
+        function animate() {
+            // Smoothly interpolate towards target rotation
+            currentRotationX += (targetRotationX - currentRotationX) * 0.1;
+            currentRotationY += (targetRotationY - currentRotationY) * 0.1;
+            
+            // Apply the rotation with limits to prevent over-rotation
+            const limitedRotationX = Math.max(Math.min(currentRotationX, 0.1), -0.1);
+            const limitedRotationY = Math.max(Math.min(currentRotationY, 0.1), -0.1);
+            
+            modelWrapper.style.transform = `rotateX(${limitedRotationX}rad) rotateY(${limitedRotationY}rad)`;
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Start animation
+        animate();
+        
+        // Add idle animation when no user interaction
+        let idleAnimation = true;
+        let idleTime = 0;
+        
+        setInterval(() => {
+            idleTime += 0.1;
+            
+            if (idleAnimation) {
+                // Gentle floating animation
+                targetRotationX = Math.sin(idleTime * 0.5) * 0.03;
+                targetRotationY = Math.cos(idleTime * 0.3) * 0.03;
+            }
+        }, 100);
+        
+        // Reset idle animation when user interacts
+        document.addEventListener('mousemove', () => {
+            idleAnimation = false;
+            setTimeout(() => {
+                idleAnimation = true;
+                idleTime = 0;
+            }, 2000);
+        });
+
+        // Stats counter animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const statsSection = document.querySelector('.stats');
+        let statsAnimated = false;
+
+        function animateStats() {
+            if (statsAnimated) return;
+            
+            const stats = [
+                { element: statNumbers[0], finalValue: 99.9, duration: 2000 },
+                { element: statNumbers[1], finalValue: 2.5, duration: 2500, isMillions: true },
+                { element: statNumbers[2], finalValue: 98, duration: 1800 }
+            ];
+            
+            stats.forEach(stat => {
+                let startValue = 0;
+                const duration = stat.duration;
+                const startTime = Date.now();
+                
+                function updateNumber() {
+                    const currentTime = Date.now();
+                    const elapsedTime = currentTime - startTime;
+                    
+                    if (elapsedTime < duration) {
+                        const progress = elapsedTime / duration;
+                        const currentValue = startValue + (stat.finalValue - startValue) * progress;
+                        
+                        if (stat.isMillions) {
+                            stat.element.textContent = currentValue.toFixed(1) + 'M+';
+                        } else {
+                            stat.element.textContent = currentValue.toFixed(1) + '%';
+                        }
+                        
+                        requestAnimationFrame(updateNumber);
+                    } else {
+                        if (stat.isMillions) {
+                            stat.element.textContent = stat.finalValue.toFixed(1) + 'M+';
+                        } else {
+                            stat.element.textContent = stat.finalValue.toFixed(1) + '%';
+                        }
+                    }
+                }
+                
+                updateNumber();
+            });
+            
+            statsAnimated = true;
+        }
+
+        // Intersection Observer to trigger stats animation when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(statsSection);
+    </script>
+        <script src="script.js"></script>
+
+</body>
+</html>
